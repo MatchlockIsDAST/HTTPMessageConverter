@@ -20,8 +20,8 @@ func TestRespons(t *testing.T) {
 
 func TestBody(t *testing.T) {
 	value := Body(testBody)
-	if value == "" {
-		t.Fatal("空文字が返されています")
+	if value != testBodystring {
+		t.Fatal("正しい文字列が帰ってきていません")
 	}
 }
 

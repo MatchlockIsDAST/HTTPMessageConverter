@@ -1,6 +1,7 @@
 package tostring
 
 import (
+	"bytes"
 	"io"
 	"net/http"
 )
@@ -27,6 +28,9 @@ func Respons(rawresponse *http.Response) (stringresponse string) {
 
 //Body io.ReadCloser (http.Body)をstring型に変換する
 func Body(rawbody io.ReadCloser) (stringbody string) {
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(rawbody)
+	stringbody = buf.String()
 	return stringbody
 }
 
@@ -38,6 +42,7 @@ hoge: hogehoge
 fuga: fugafuga
 */
 func Header(rawheader http.Header) (stringhead string) {
+
 	return stringhead
 }
 
