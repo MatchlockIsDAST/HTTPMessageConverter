@@ -6,15 +6,16 @@ import (
 
 func TestRequest(t *testing.T) {
 	value := Request(&testRequest)
-	if value == "" {
-		t.Fatal("空文字が返されています")
+	if value != testRequestMessage {
+		t.Fatal("正しい文字列が帰ってきていません")
 	}
+	t.Error()
 }
 
 func TestRespons(t *testing.T) {
 	value := Respons(&testResponse)
-	if value == "" {
-		t.Fatal("空文字が返されています")
+	if value != testResponseMessage {
+		t.Fatal("正しい文字列が帰ってきていません")
 	}
 }
 
@@ -28,6 +29,6 @@ func TestBody(t *testing.T) {
 func TestHeader(t *testing.T) {
 	value := Header(testHeaders)
 	if value != testHeaderRequest {
-		t.Fatal("空文字が返されています")
+		t.Fatal("正しい文字列が帰ってきていません")
 	}
 }

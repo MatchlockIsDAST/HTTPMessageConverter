@@ -37,7 +37,7 @@ var (
 			"Content-Encoding": []string{"gzip"},
 		},
 	}
-	testBodystring = "<!DOCTYPE html><html><header></header><body>Test Data</body></html>"
+	testBodystring = "<!DOCTYPE html>\n<html>\n<header>\n</header>\n<body>\nTest Data\n</body>\n</html>\n"
 	testBody       = ioutil.NopCloser(strings.NewReader(testBodystring))
 	testHeaders    = http.Header{
 		"accept":          []string{"text/html", "application/xhtml+xml", "application/xml;q=0.9", "image/webp", "image/apng", "*/*;q=0.8", "application/signed-exchange;v=b3"},
@@ -50,5 +50,5 @@ var (
 	testHeaderRequest     = "accept: text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8, application/signed-exchange;v=b3\r\naccept-encoding: gzip, deflate, br\r\naccept-language: ja\r\nhost: google.com"
 	testHeaderResponse    = "Cache-Control: max-age=0, private, must-revalidate\r\nContent-Encoding: gzip"
 	testRequestMessage    = testStartLineRequest + testHeaderRequest + "\r\n\r\n\r\n"
-	testResponseMessage   = testStartLineResponse + testHeaderResponse + "\r\n\r\n" + testBodystring + "\r\n\r\n"
+	testResponseMessage   = testStartLineResponse + testHeaderResponse + "\r\n\r\n" + testBodystring + "\r\n"
 )

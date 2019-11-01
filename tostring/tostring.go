@@ -20,6 +20,11 @@ body...
 
 */
 func Request(rawrequest *http.Request) (stringrequest string) {
+	u := rawrequest.URL.String()
+	stringrequest += fmt.Sprintf("%v %v %v\r\n", rawrequest.Method, u, rawrequest.Proto)
+	stringrequest += Header(rawrequest.Header) + "\r\n\r\n"
+	stringrequest += Body(rawrequest.Body) + "\r\n"
+	fmt.Println(stringrequest)
 	return stringrequest
 }
 
@@ -30,6 +35,9 @@ func Respons(rawresponse *http.Response) (stringresponse string) {
 
 //Body io.ReadCloser (http.Body)をstring型に変換する
 func Body(rawbody io.ReadCloser) (stringbody string) {
+	if rawbody == nil {
+		return ""
+	}
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(rawbody)
 	stringbody = buf.String()
