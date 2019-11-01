@@ -26,8 +26,8 @@ func TestBody(t *testing.T) {
 }
 
 func TestHeader(t *testing.T) {
-	value := Header(testHeader)
-	if value == "" {
+	value := Header(testHeaders)
+	if value != testHeaderRequest {
 		t.Fatal("空文字が返されています")
 	}
 }

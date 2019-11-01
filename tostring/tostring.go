@@ -2,8 +2,10 @@ package tostring
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 	"net/http"
+	"strings"
 )
 
 //Request net/http Request Structをstring型に変換する
@@ -42,7 +44,14 @@ hoge: hogehoge
 fuga: fugafuga
 */
 func Header(rawheader http.Header) (stringhead string) {
-
+	headers := []string{}
+	for name := range rawheader {
+		headers = append(headers, name)
+	}
+	for i, name := range headers {
+		headers[i] = fmt.Sprintf("%v: %v", name, strings.Join(rawheader[name], ", "))
+	}
+	stringhead = strings.Join(headers, "\r\n")
 	return stringhead
 }
 
