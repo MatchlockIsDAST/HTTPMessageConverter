@@ -9,7 +9,6 @@ func TestRequest(t *testing.T) {
 	if value != testRequestMessage {
 		t.Fatal("正しい文字列が帰ってきていません")
 	}
-	t.Error()
 }
 
 func TestRespons(t *testing.T) {

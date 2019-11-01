@@ -36,8 +36,9 @@ var (
 			"Cache-Control":    []string{"max-age=0", "private", "must-revalidate"},
 			"Content-Encoding": []string{"gzip"},
 		},
+		Body: testBody,
 	}
-	testBodystring = "<!DOCTYPE html>\n<html>\n<header>\n</header>\n<body>\nTest Data\n</body>\n</html>\n"
+	testBodystring = "<!DOCTYPE html>\n<html>\n<header>\n</header>\n<body>\nTest Data\n</body>\n</html>"
 	testBody       = ioutil.NopCloser(strings.NewReader(testBodystring))
 	testHeaders    = http.Header{
 		"accept":          []string{"text/html", "application/xhtml+xml", "application/xml;q=0.9", "image/webp", "image/apng", "*/*;q=0.8", "application/signed-exchange;v=b3"},

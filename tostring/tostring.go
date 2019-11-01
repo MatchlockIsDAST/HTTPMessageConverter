@@ -24,12 +24,14 @@ func Request(rawrequest *http.Request) (stringrequest string) {
 	stringrequest += fmt.Sprintf("%v %v %v\r\n", rawrequest.Method, u, rawrequest.Proto)
 	stringrequest += Header(rawrequest.Header) + "\r\n\r\n"
 	stringrequest += Body(rawrequest.Body) + "\r\n"
-	fmt.Println(stringrequest)
 	return stringrequest
 }
 
 //Respons net/http Response Structをstring型に変換する
 func Respons(rawresponse *http.Response) (stringresponse string) {
+	stringresponse += fmt.Sprintf("%v %v\r\n", rawresponse.Proto, rawresponse.Status)
+	stringresponse += Header(rawresponse.Header) + "\r\n\r\n"
+	stringresponse += Body(rawresponse.Body) + "\r\n"
 	return stringresponse
 }
 
