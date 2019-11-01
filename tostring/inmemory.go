@@ -17,7 +17,7 @@ var (
 			RawPath:  "/search",
 			RawQuery: "q=otnet",
 		},
-		Header:        testHeader,
+		Header:        testHeaders,
 		Proto:         "HTTP/1.1",
 		ProtoMajor:    1,
 		ProtoMinor:    1,
@@ -39,10 +39,16 @@ var (
 	}
 	testBodystring = "<!DOCTYPE html><html><header></header><body>Test Data</body></html>"
 	testBody       = ioutil.NopCloser(strings.NewReader(testBodystring))
-	testHeader     = http.Header{
-		"Host":            []string{"google.com"},
+	testHeaders    = http.Header{
 		"accept":          []string{"text/html", "application/xhtml+xml", "application/xml;q=0.9", "image/webp", "image/apng", "*/*;q=0.8", "application/signed-exchange;v=b3"},
 		"accept-encoding": []string{"gzip", "deflate", "br"},
 		"accept-language": []string{"ja"},
+		"host":            []string{"google.com"},
 	}
+	testStartLineRequest  = "GET https://google.com/search?q=otnet HTTP/1.1\r\n"
+	testStartLineResponse = "HTTP/1.1 200 OK\r\n"
+	testHeaderRequest     = "accept: text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8, application/signed-exchange;v=b3\r\naccept-encoding: gzip, deflate, br\r\naccept-language: ja\r\nhost: google.com"
+	testHeaderResponse    = "Cache-Control: max-age=0, private, must-revalidate\r\nContent-Encoding: gzip"
+	testRequestMessage    = testStartLineRequest + testHeaderRequest + "\r\n\r\n\r\n"
+	testResponseMessage   = testStartLineResponse + testHeaderResponse + "\r\n\r\n" + testBodystring + "\r\n\r\n"
 )
