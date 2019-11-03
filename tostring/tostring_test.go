@@ -2,32 +2,34 @@ package tostring
 
 import (
 	"testing"
+
+	"github.com/MatchlockIsDAST/HTTPMessageConverter/inmemory"
 )
 
 func TestRequest(t *testing.T) {
-	value := Request(&testRequest)
-	if value != testRequestMessage {
+	value := Request(&inmemory.TestRequest)
+	if value != inmemory.TestRequestMessage {
 		t.Fatal("正しい文字列が帰ってきていません")
 	}
 }
 
 func TestRespons(t *testing.T) {
-	value := Respons(&testResponse)
-	if value != testResponseMessage {
+	value := Respons(&inmemory.TestResponse)
+	if value != inmemory.TestResponseMessage {
 		t.Fatal("正しい文字列が帰ってきていません")
 	}
 }
 
 func TestBody(t *testing.T) {
-	value := Body(testBody)
-	if value != testBodystring {
+	value := Body(inmemory.TestBody)
+	if value != inmemory.TestBodystring {
 		t.Fatal("正しい文字列が帰ってきていません")
 	}
 }
 
 func TestHeader(t *testing.T) {
-	value := Header(testHeaders)
-	if value != testHeaderRequest {
+	value := Header(inmemory.TestHeaders)
+	if value != inmemory.TestHeaderRequest {
 		t.Fatal("正しい文字列が帰ってきていません")
 	}
 }
