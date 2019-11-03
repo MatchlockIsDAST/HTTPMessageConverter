@@ -20,7 +20,8 @@ body...
 
 */
 func Request(rawrequest *http.Request) (stringrequest string) {
-	u := rawrequest.URL.String()
+	q := rawrequest.URL.Query()
+	u := rawrequest.URL.Path + "?" + q.Encode()
 	stringrequest += fmt.Sprintf("%v %v %v\r\n", rawrequest.Method, u, rawrequest.Proto)
 	stringrequest += Header(rawrequest.Header) + "\r\n\r\n"
 	stringrequest += Body(rawrequest.Body) + "\r\n"
