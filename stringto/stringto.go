@@ -8,11 +8,12 @@ import (
 )
 
 //SplitHTTPRequestMessageForLine はrawrequest (string型)を入力することによってstartlineとheaderlineとbodyに分割する
+//現状Chankに対応していない
 func SplitHTTPRequestMessageForLine(rawrequest string) (start string, header []string, body string) {
 	rawrequest = strings.Replace(rawrequest, "\r", "", -1)
 	splited := strings.Split(rawrequest, "\n\n")
-	if len(splited) > 2 {
-		body = splited[1]
+	if len(splited) > 1 {
+		body = strings.Replace(splited[1], "\n", "", -1)
 	}
 	splited = strings.Split(splited[0], "\n")
 	start = splited[0]
@@ -35,10 +36,11 @@ func SplitStartline(rawstartline string) (method, uriAndQuery, proto string) {
 
 //HTTPHeader string型をhttp.Header型に変換します
 func HTTPHeader(rawheaders []string) (httpheader http.Header) {
-	httpheader = map[string][]string{}
+	httpheader = http.Header{}
 	for _, v := range rawheaders {
-		splitHeader := strings.Split(v, ":")
-		httpheader[splitHeader[0]] = strings.Split(splitHeader[1], ",")
+		splitHeader := strings.Split(v, ": ")
+		val := strings.Replace(splitHeader[1], ", ", ",", -1)
+		httpheader[splitHeader[0]] = strings.Split(val, ",")
 	}
 	return httpheader
 }
