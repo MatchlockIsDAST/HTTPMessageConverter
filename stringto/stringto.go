@@ -8,7 +8,15 @@ import (
 )
 
 //SplitHTTPRequestMessageForLine はrawrequest (string型)を入力することによってstartlineとheaderlineとbodyに分割する
-func SplitHTTPRequestMessageForLine(rawrequest string) (start string, header string, body string) {
+func SplitHTTPRequestMessageForLine(rawrequest string) (start string, header []string, body string) {
+	rawrequest = strings.Replace(rawrequest, "\r", "", -1)
+	splited := strings.Split(rawrequest, "\n\n")
+	if len(splited) > 2 {
+		body = splited[1]
+	}
+	splited = strings.Split(splited[0], "\n")
+	start = splited[0]
+	header = splited[1:]
 	return start, header, body
 }
 
@@ -16,6 +24,13 @@ func SplitHTTPRequestMessageForLine(rawrequest string) (start string, header str
 func IoReadCloser(rawbody string) (ioReadCloser io.ReadCloser) {
 	ioReadCloser = ioutil.NopCloser(strings.NewReader(rawbody))
 	return ioReadCloser
+}
+
+//SplitStartline startlineをmethod, uriAndQuery, protoに分割します
+func SplitStartline(rawstartline string) (method, uriAndQuery, proto string) {
+	splited := strings.Split(rawstartline, " ")
+	method, uriAndQuery, proto = splited[0], splited[1], splited[2]
+	return method, uriAndQuery, proto
 }
 
 //HTTPHeader string型をhttp.Header型に変換します
