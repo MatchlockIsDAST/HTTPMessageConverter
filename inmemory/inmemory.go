@@ -46,10 +46,12 @@ var (
 		"accept-language": []string{"ja"},
 		"host":            []string{"google.com"},
 	}
-	TestStartLineRequest  = "GET https://google.com/search?q=otnet HTTP/1.1\r\n"
-	TestStartLineResponse = "HTTP/1.1 200 OK\r\n"
-	TestHeaderRequest     = "accept: text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8, application/signed-exchange;v=b3\r\naccept-encoding: gzip, deflate, br\r\naccept-language: ja\r\nhost: google.com"
-	TestHeaderResponse    = "Cache-Control: max-age=0, private, must-revalidate\r\nContent-Encoding: gzip"
-	TestRequestMessage    = TestStartLineRequest + TestHeaderRequest + "\r\n\r\n\r\n"
-	TestResponseMessage   = TestStartLineResponse + TestHeaderResponse + "\r\n\r\n" + TestBodystring + "\r\n"
+	TestStartLineRequest     = "GET /search?q=otnet HTTP/1.1\r\n"
+	TestStartLinePOSTRequest = "POST /search HTTP/1.1\r\n"
+	TestStartLineResponse    = "HTTP/1.1 200 OK\r\n"
+	TestHeaderRequest        = "accept: text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8, application/signed-exchange;v=b3\r\naccept-encoding: gzip, deflate, br\r\naccept-language: ja\r\nhost: google.com"
+	TestHeaderResponse       = "Cache-Control: max-age=0, private, must-revalidate\r\nContent-Encoding: gzip"
+	TestRequestMessage       = TestStartLineRequest + TestHeaderRequest + "\r\n\r\n\r\n"
+	TestResponseMessage      = TestStartLineResponse + TestHeaderResponse + "\r\n\r\n" + TestBodystring + "\r\n"
+	TestPOSTRequestMessage   = TestStartLinePOSTRequest + TestHeaderRequest + "\r\n\r\n" + "q=hoge&fuga=fuga" + "\r\n"
 )
